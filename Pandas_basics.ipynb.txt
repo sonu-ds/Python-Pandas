@@ -1,0 +1,202 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "MKXTc2Tas23T"
+      },
+      "source": [
+        "# <u> Use only those concepts which have been taught till now </u>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0V3Xtuh9siNn"
+      },
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Ase3qjp9cJUC"
+      },
+      "source": [
+        "# <u>**Problem 1**</u>\n",
+        "\n",
+        "### You are given a list of urls. You need to extract the domain name from the urls in another list. Also you need to extract the ending string which the url ends with.\n",
+        "\n",
+        "### For example, https://www.example.com/market.php -- In this example, domain name is <code>www.example.com</code> and the ending string is <code>php</code>\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xj0SaK7smcPu"
+      },
+      "source": [
+        "# List of urls\n",
+        "url_list = ['https://blog.hubspot.com/marketing/parts-url',\n",
+        "            'https://www.almabetter.com/enrollments',\n",
+        "            'https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rename.html',\n",
+        "            'https://www.programiz.com/python-programming/list']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "N1hhYCZw3V1c",
+        "outputId": "d84b2e29-91ee-4b33-f57f-0373a1693334",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "source": [
+        "# Extract the domains and the ending string. Hint : use the split method for a string\n",
+        "domain_list = []\n",
+        "ending_string_list = []\n",
+        "for i in url_list:\n",
+        "  domain_list.append(i.split('/')[2])\n",
+        "  end_list = i.split('/')[-1]\n",
+        "  ending_string_list.append(end_list.split('.')[-1])\n",
+        "\n",
+        "ending_string_list\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['parts-url', 'enrollments', 'html', 'list']"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 9
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "EVgY54DrvLEF"
+      },
+      "source": [
+        "## Next create a pandas dataframe with the above three lists."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2osXcjvpu6Uz",
+        "outputId": "784baa5e-464a-417c-85e0-77edd03df8d3",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 173
+        }
+      },
+      "source": [
+        "# Your code here. Hint : zip the three lists\n",
+        "final_df = list(zip(url_list,domain_list,ending_string_list))\n",
+        "final_df = pd.DataFrame(final_df, columns=['Urls','Domain','Ending String'])\n",
+        "final_df\n",
+        "\n"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>Urls</th>\n",
+              "      <th>Domain</th>\n",
+              "      <th>Ending String</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>https://blog.hubspot.com/marketing/parts-url</td>\n",
+              "      <td>blog.hubspot.com</td>\n",
+              "      <td>parts-url</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>https://www.almabetter.com/enrollments</td>\n",
+              "      <td>www.almabetter.com</td>\n",
+              "      <td>enrollments</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>https://pandas.pydata.org/pandas-docs/stable/r...</td>\n",
+              "      <td>pandas.pydata.org</td>\n",
+              "      <td>html</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>https://www.programiz.com/python-programming/list</td>\n",
+              "      <td>www.programiz.com</td>\n",
+              "      <td>list</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "                                                Urls  ... Ending String\n",
+              "0       https://blog.hubspot.com/marketing/parts-url  ...     parts-url\n",
+              "1             https://www.almabetter.com/enrollments  ...   enrollments\n",
+              "2  https://pandas.pydata.org/pandas-docs/stable/r...  ...          html\n",
+              "3  https://www.programiz.com/python-programming/list  ...          list\n",
+              "\n",
+              "[4 rows x 3 columns]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 12
+        }
+      ]
+    }
+  ]
+}
